@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Свадебный билет — Илья & Алина</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #0f1f3a;
+      font-family: 'Montserrat', sans-serif;
+      color: #0f1f3a;
+      display: flex;
+      justify-content: center;
+    }
+    .page {
+      width: 100%;
+      max-width: 420px;
+      background: #f7f6f3;
+      border-radius: 32px;
+      overflow: hidden;
+      margin: 24px 0;
+    }
+    .ticket-edge {
+      height: 20px;
+      background: repeating-linear-gradient(
+        90deg,
+        #0f1f3a,
+        #0f1f3a 12px,
+        transparent 12px,
+        transparent 24px
+      );
+    }
+    .section {
+      padding: 40px 28px;
+      text-align: center;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      margin: 0 0 16px;
+      letter-spacing: 1px;
+    }
+    h1 { font-size: 34px; }
+    h2 { font-size: 28px; }
+    h3 { font-size: 22px; }
+    p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #333;
+    }
+    .ticket-card {
+      border: 2px dashed #0f1f3a;
+      border-radius: 24px;
+      padding: 28px;
+      margin: 24px 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      font-size: 14px;
+    }
+    .grid div strong {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: #666;
+      margin-bottom: 4px;
+    }
+    .photo {
+      width: 100%;
+      border-radius: 24px;
+      margin-top: 24px;
+    }
+    .calendar {
+      background: #fff;
+      border-radius: 24px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+    .calendar h3 { margin-bottom: 12px; }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      font-size: 14px;
+    }
+    .calendar-grid span {
+      padding: 6px 0;
+    }
+    .heart {
+      background: #b11226;
+      color: #fff;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+    }
+    form input, form select {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 12px;
+      border-radius: 14px;
+      border: 1px solid #ccc;
+      font-family: Montserrat;
+    }
+    form button {
+      padding: 16px 32px;
+      border-radius: 20px;
+      border: none;
+      background: #0f1f3a;
+      color: #fff;
+      font-size: 15px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <div class="ticket-edge"></div>
+
+    <div class="section">
+      <img src="https://images.unsplash.com/photo-1580428180121-9a9b5b6f9c9b?auto=format&fit=crop&w=800&q=80" alt="Planet with airplane" style="width:220px; margin:0 auto 24px; display:block;">
+      <h3>СВАДЕБНЫЙ БИЛЕТ</h3>
+      <h1>Илья & Алина</h1>
+      <div class="ticket-card">
+        <div class="grid">
+          <div><strong>FLIGHT & DATE</strong>28.02.2026</div>
+          <div><strong>CLASS</strong>Первый класс</div>
+          <div><strong>TO / DESTINATION</strong>Билет в счастье</div>
+          <div><strong>МЕСТО</strong>На борту лайнера</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" style="background:#0f1f3a; color:#fff;">
+      <h2>ДОРОГИЕ НАШИ<br>ДРУЗЬЯ И РОДНЫЕ!</h2>
+      <p style="color:#eaeaea;">Это официальное приглашение на нашу свадьбу.
+      Мы очень хотим видеть вас рядом с нами в этот особенный день.</p>
+      <img class="photo" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="engagement">
+    </div>
+
+    <div class="section">
+      <h2>МЫ ЖДЁМ ВАС</h2>
+      <p>На первом празднике нашей семьи</p>
+      <div class="calendar">
+        <h3>ФЕВРАЛЬ</h3>
+        <div class="calendar-grid">
+          <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+          <span></span><span></span><span></span><span></span><span></span><span>1</span><span>2</span>
+          <span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+          <span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span>
+          <span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
+          <span>24</span><span>25</span><span>26</span><span>27</span><div class="heart">28</div>
+        </div>
+      </div>
+      <h2>28.02.2026</h2>
+    </div>
+
+    <div class="section">
+      <h2>ТАЙМИНГ</h2>
+      <p>18:30 — Сбор гостей<br>
+         19:00–21:00 — Фотограф<br>
+         21:00 — Танцы</p>
+    </div>
+
+    <div class="section">
+      <h2>ПОДТВЕРДИТЬ ПРИСУТСТВИЕ</h2>
+      <form action="https://t.me/spacecake22" method="get" target="_blank">
+        <input type="text" name="name" placeholder="Ваше имя" required>
+        <select name="attendance" required>
+          <option value="">Вы сможете прийти?</option>
+          <option value="yes">Да, с радостью</option>
+          <option value="no">К сожалению, не смогу</option>
+        </select>
+        <button type="submit">Подтвердить</button>
+      </form>
+    </div>
+
+    <div class="ticket-edge"></div>
+
+  </div>
+</body>
+</html>
