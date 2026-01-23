@@ -157,8 +157,142 @@
   text-align: left;
   padding-left: 24px;
   font-family: 'Playfair Display', serif;
-  font-size: 37px;
+  font-size: 32px;
   color: #fff;
+}
+   .location-section {
+  background: #f7f6f3;
+}
+
+.location-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+
+.location-text {
+  margin: 20px 0 28px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.location-button {
+  display: inline-block;
+  background: #0f1f3a;
+  color: #fff;
+  text-decoration: none;
+  padding: 16px 28px;
+  border-radius: 16px;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 32px;
+}
+
+.location-image {
+  width: 100%;
+  border-radius: 24px;
+}
+
+.countdown-section {
+  position: relative;
+  margin: 40px 0;
+}
+
+.countdown-bg {
+  width: 100%;
+  border-radius: 24px;
+  display: block;
+}
+
+.countdown-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.2),
+    rgba(0,0,0,0.7)
+  );
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px 20px;
+  color: #fff;
+}
+
+.countdown-title {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 24px;
+}
+
+.countdown-timer {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.countdown-timer span {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  display: block;
+}
+
+.countdown-timer small {
+  font-size: 12px;
+  letter-spacing: 1px;
+  opacity: 0.9;
+}
+
+    .countdown-outer {
+  padding: 40px 28px;
+}
+
+.countdown-card {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.countdown-bg {
+  width: 100%;
+  display: block;
+}
+
+.countdown-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.25),
+    rgba(0,0,0,0.75)
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px 20px;
+  color: #fff;
+}
+
+.countdown-title {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 24px;
+}
+
+.countdown-timer {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.countdown-timer span {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  display: block;
+}
+
+.countdown-timer small {
+  font-size: 12px;
+  letter-spacing: 1px;
+  opacity: 0.9;
 }
     }
   </style>
@@ -184,9 +318,9 @@
 
     <div class="section" style="background:#0f1f3a; color:#fff;">
       <h2>ДОРОГИЕ НАШИ<br>ДРУЗЬЯ И РОДНЫЕ!</h2>
-      <p style="color:#eaeaea;">Это официальное приглашение на свадебный ужин.
+      <p style="color:#eaeaea;">Это приглашение на наш свадебный ужин.
       Мы очень хотим видеть вас рядом с нами в этот особенный день.</p>
-      <img class="photo" src="https://raw.githubusercontent.com/malinalispirovna22/malinalispirovna22.github.io/refs/heads/main/a9e97a01af5431aad84446eab2f2f6ae.jpg">
+      <img class="photo" src="https://raw.githubusercontent.com/malinalispirovna22/malinalispirovna22.github.io/refs/heads/main/we_chb.jpg">
     </div>
 
     <div class="section">
@@ -203,7 +337,7 @@
           <span>24</span><span>25</span><span>26</span><span>27</span><div class="heart">28</div>
         </div>
       </div>
-      <h2>28.02.2026</h2>
+      <h2 style="margin:0 0 0">28.02.2026</h2>
     </div>
 
   <div class="section timing-section" style="background:#0f1f3a; color:#fff;">
@@ -232,6 +366,64 @@
   </div>
 </div>
 
+<div class="section location-section">
+  <h2 class="location-title">МЕСТО<br>ПРОВЕДЕНИЯ</h2>
+
+  <p class="location-text">
+    На борту лайнера, Оренбург<br>
+    ул. Салмышская 51
+  </p>
+
+  <a
+    href="https://yandex.ru/maps/org/na_bortu_laynera/134563493916/?ll=55.174527%2C51.817350&z=16"
+    target="_blank"
+    class="location-button"
+  >
+    КАК ДОБРАТЬСЯ
+  </a>
+
+  <img
+    src="https://raw.githubusercontent.com/malinalispirovna22/malinalispirovna22.github.io/refs/heads/main/place.jpeg"
+    class="location-image"
+    alt="Место проведения"
+  >
+</div>
+
+<div class="section countdown-outer" style="background:#0f1f3a;">
+  <div class="countdown-card">
+
+    <img
+      src="https://raw.githubusercontent.com/malinalispirovna22/malinalispirovna22.github.io/refs/heads/main/wed.jpg"
+      class="countdown-bg"
+      alt=""
+    >
+
+    <div class="countdown-overlay">
+      <h2 class="countdown-title">ДО СВАДЬБЫ ОСТАЛОСЬ</h2>
+
+      <div class="countdown-timer">
+        <div>
+          <span id="days">00</span>
+          <small>Дней</small>
+        </div>
+        <div>
+          <span id="hours">00</span>
+          <small>Часа</small>
+        </div>
+        <div>
+          <span id="minutes">00</span>
+          <small>Минут</small>
+        </div>
+        <div>
+          <span id="seconds">00</span>
+          <small>Секунд</small>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
     <div class="section">
       <h2>ПОДТВЕРДИТЬ ПРИСУТСТВИЕ</h2>
       <form id="rsvpForm">
@@ -241,7 +433,7 @@
           <option value="yes">Да, с радостью</option>
           <option value="no">К сожалению, не смогу</option>
         </select>
-        <button type="submit">Подтвердить</button>
+        <button type="submit">Отправить</button>
       </form>
     </div>
 
@@ -249,27 +441,61 @@
 
   </div>
 
-  <script>
-    document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-      e.preventDefault();
+<script>
+  document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-      const name = document.getElementById('name').value.trim();
-      const attendance = document.getElementById('attendance').value;
+    const name = document.getElementById('name').value.trim();
+    const attendance = document.getElementById('attendance').value;
 
-      let message = '';
+    let message = '';
 
-      if (attendance === 'yes') {
-        message = `💍 Свадебное приглашение\n\nИмя: ${name}\nОтвет: С радостью буду на свадьбе 🎉`;
-      } else if (attendance === 'no') {
-        message = `💍 Свадебное приглашение\n\nИмя: ${name}\nОтвет: К сожалению, не смогу прийти 😔`;
-      }
+    if (attendance === 'yes') {
+      message = `💍 Свадебное приглашение\n\nИмя: ${name}\nОтвет: С радостью буду на свадьбе 🎉`;
+    } else if (attendance === 'no') {
+      message = `💍 Свадебное приглашение\n\nИмя: ${name}\nОтвет: К сожалению, не смогу прийти 😔`;
+    }
 
-      const telegramUsername = 'spacecake22';
-      const url = `https://t.me/${telegramUsername}?text=${encodeURIComponent(message)}`;
+    const encodedMessage = encodeURIComponent(message);
+    const username = 'spacecake22';
 
-      window.open(url, '_blank');
-    });
-  </script>
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
+    let url = '';
+
+    if (isMobile) {
+      // 📱 Telegram app
+      url = `tg://resolve?domain=${username}&text=${encodedMessage}`;
+    } else {
+      // 💻 Telegram Web
+      url = `https://t.me/${username}?text=${encodedMessage}`;
+    }
+
+    window.open(url, '_blank');
+  });
+</script>
+
+<script>
+  function updateCountdown() {
+    const targetDate = new Date('2026-02-28T19:00:00');
+    const now = new Date();
+    const diff = targetDate - now;
+
+    if (diff <= 0) return;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById('days').textContent = String(days).padStart(2, '0');
+    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
 </body>
 </html>
