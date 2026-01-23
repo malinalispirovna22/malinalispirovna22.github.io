@@ -122,53 +122,45 @@
   color: #fff;
 }
 
-.timing-section {
-  background: #0f1f3a;
-  color: #fff;
-}
-
-.timing-title {
-  margin-bottom: 24px;
-  letter-spacing: 2px;
-}
-
-.timing-box {
-  border: 2px solid rgba(255, 255, 255, 0.6);
-  border-radius: 24px;
-  padding: 28px 20px;
-}
-
-.timing-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.timing-list {
   position: relative;
-  row-gap: 24px;
+  margin-top: 32px;
 }
 
-.timing-grid::before {
+/* центральная линия */
+.timing-list::before {
   content: "";
   position: absolute;
   top: 0;
   bottom: 0;
   left: 50%;
   width: 1px;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.5);
   transform: translateX(-50%);
 }
 
+.timing-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+}
+
 .timing-text {
-  text-align: left;
+  width: 48%;
+  text-align: right;
+  padding-right: 24px;
   font-size: 15px;
-  padding-right: 20px;
+  color: #eaeaea;
 }
 
 .timing-time {
-  text-align: right;
+  width: 48%;
+  text-align: left;
+  padding-left: 24px;
   font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  padding-left: 20px;
-}
-
+  font-size: 32px;
+  color: #fff;
 }
 
     }
@@ -217,24 +209,28 @@
       <h2 style="margin: 0 0 0;">28.02.2026</h2>
     </div>
 
- <div class="section timing-section">
-  <h2 class="timing-title">ТАЙМИНГ</h2>
+ <div class="section timing-section" style="background:#0f1f3a; color:#fff;">
+  <h2>ТАЙМИНГ</h2>
 
-  <div class="timing-box">
-    <div class="timing-grid">
-
+  <div class="timing-list">
+    <div class="timing-item">
       <div class="timing-text">Сбор гостей</div>
       <div class="timing-time">19:00</div>
+    </div>
 
+    <div class="timing-item">
       <div class="timing-text">Фотограф</div>
       <div class="timing-time">19:30</div>
+    </div>
 
+    <div class="timing-item">
       <div class="timing-text">Живая музыка</div>
       <div class="timing-time">20:00</div>
+    </div>
 
+    <div class="timing-item">
       <div class="timing-text">Танцы</div>
       <div class="timing-time">22:00</div>
-
     </div>
   </div>
 </div>
