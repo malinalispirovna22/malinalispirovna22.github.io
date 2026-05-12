@@ -1,540 +1,451 @@
 <!DOCTYPE html>
 <html lang="ru">
-<link rel="icon" type="image/png" href="favicon.ico">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Приглашение — Илья & Алина</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: #0f1f3a;
-      font-family: 'Montserrat', sans-serif;
-      color: #0f1f3a;
-      display: flex;
-      justify-content: center;
-    }
-    .page {
-      width: 100%;
-      max-width: 420px;
-      background: #f7f6f3;
-      border-radius: 32px;
-      overflow: hidden;
-      margin: 24px 0;
-    }
-    .ticket-edge {
-      height: 20px;
-      background: repeating-linear-gradient(
-        90deg,
-        #0f1f3a,
-        #0f1f3a 12px,
-        transparent 12px,
-        transparent 24px
-      );
-    }
-    .section {
-      padding: 40px 22px;
-      text-align: center;
-    }
-    h1, h2, h3 {
-      font-family: 'Playfair Display', serif;
-      margin: 0 0 16px;
-      letter-spacing: 1px;
-    }
-    h1 { font-size: 34px; }
-    h2 { font-size: 28px; }
-    h3 { font-size: 22px; }
-    p {
-      font-size: 15px;
-      line-height: 1.6;
-      color: #333;
-    }
-    .ticket-card {
-      border: 2px dashed #0f1f3a;
-      border-radius: 24px;
-      padding: 28px;
-      margin: 24px 0;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      font-size: 14px;
-    }
-    .grid div strong {
-      display: block;
-      font-size: 11px;
-      letter-spacing: 1px;
-      color: #666;
-      margin-bottom: 4px;
-    }
-    .photo {
-      width: 100%;
-      border-radius: 24px;
-      margin-top: 24px;
-    }
-    .calendar {
-      background: #fff;
-      border-radius: 24px;
-      padding: 24px;
-      margin: 24px 0;
-    }
-    .calendar h3 { margin-bottom: 12px; }
-    .calendar-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 8px;
-      font-size: 14px;
-    }
-    .calendar-grid span {
-      padding: 6px 0;
-    }
-    .heart {
-      background: #b11226;
-      color: #fff;
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: auto;
-    }
-    form input, form select {
-      width: 100%;
-      padding: 14px;
-      margin-bottom: 12px;
-      border-radius: 14px;
-      border: 1px solid #ccc;
-      font-family: Montserrat;
-    }
-    form button {
-      padding: 16px 32px;
-      border-radius: 20px;
-      border: none;
-      background: #0f1f3a;
-      color: #fff;
-      font-size: 15px;
-      cursor: pointer;
 
-      
-      }
-.timing-list {
-  position: relative;
-  margin-top: 32px;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Polaroid Generator</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
 }
 
-/* центральная линия */
-.timing-list::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 1px;
-  background: rgba(255, 255, 255, 0.5);
-  transform: translateX(-50%);
+body{
+  background:#f3f3f3;
+  padding:40px;
 }
 
-.timing-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6px 0;
+.container{
+  max-width:1200px;
+  margin:auto;
 }
 
-.timing-text {
-  width: 48%;
-  text-align: right;
-  padding-right: 24px;
-  font-size: 15px;
-  color: #eaeaea;
+.panel{
+  background:white;
+  padding:30px;
+  border-radius:24px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.06);
 }
 
-.timing-time {
-  width: 48%;
-  text-align: left;
-  padding-left: 24px;
-  font-family: 'Playfair Display', serif;
-  font-size: 32px;
-  color: #fff;
-}
-   .location-section {
-  background: #f7f6f3;
+h1{
+  margin-bottom:10px;
 }
 
-.location-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 30px;
-  letter-spacing: 2px;
+p{
+  color:#777;
+  margin-bottom:25px;
 }
 
-.location-text {
-  margin: 20px 0 28px;
-  font-size: 15px;
-  line-height: 1.6;
+.controls{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
 }
 
-.location-button {
-  display: inline-block;
-  background: #0f1f3a;
-  color: #fff;
-  text-decoration: none;
-  padding: 16px 28px;
-  border-radius: 16px;
-  font-family: 'Playfair Display', serif;
-  margin-bottom: 32px;
+.btn{
+  padding:14px 24px;
+  border:none;
+  border-radius:14px;
+  cursor:pointer;
+  font-size:16px;
 }
 
-.location-image {
-  width: 100%;
-  border-radius: 24px;
+.upload-btn{
+  background:#111;
+  color:white;
 }
 
-.countdown-section {
-  position: relative;
-  margin: 40px 0;
+.generate-btn{
+  background:white;
+  border:1px solid #ccc;
 }
 
-.countdown-bg {
-  width: 100%;
-  border-radius: 24px;
-  display: block;
+input{
+  display:none;
 }
 
-.countdown-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.2),
-    rgba(0,0,0,0.7)
-  );
-  border-radius: 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 32px 20px;
-  color: #fff;
+.layouts{
+  margin-top:30px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(400px,1fr));
+  gap:20px;
 }
 
-.countdown-title {
-  font-family: 'Playfair Display', serif;
-  margin-bottom: 24px;
+.card{
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+  padding:15px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.05);
 }
 
-.countdown-timer {
-  display: flex;
-  justify-content: space-between;
-  text-align: center;
+.card img{
+  width:100%;
+  display:block;
+  border-radius:10px;
+  border:1px solid #ddd;
 }
 
-.countdown-timer span {
-  font-family: 'Playfair Display', serif;
-  font-size: 32px;
-  display: block;
+.card button{
+  width:100%;
+  margin-top:12px;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  background:#111;
+  color:white;
+  cursor:pointer;
 }
 
-.countdown-timer small {
-  font-size: 12px;
-  letter-spacing: 1px;
-  opacity: 0.9;
+.info{
+  margin-top:20px;
+  color:#999;
+  font-size:14px;
 }
 
-    .countdown-outer {
-  padding: 40px 28px;
-}
+</style>
 
-.countdown-card {
-  position: relative;
-  border-radius: 24px;
-  overflow: hidden;
-}
-
-.countdown-bg {
-  width: 100%;
-  display: block;
-}
-
-.countdown-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.25),
-    rgba(0,0,0,0.75)
-  );
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 32px 20px;
-  color: #fff;
-}
-
-.countdown-title {
-  font-family: 'Playfair Display', serif;
-  margin-bottom: 91px;
-}
-
-.countdown-timer {
-  display: flex;
-  justify-content: space-between;
-  text-align: center;
-}
-
-.countdown-timer span {
-  font-family: 'Playfair Display', serif;
-  font-size: 32px;
-  display: block;
-}
-
-.countdown-timer small {
-  font-size: 12px;
-  letter-spacing: 1px;
-  opacity: 0.9;
-}
-    }
-  </style>
 </head>
+
 <body>
-  <div class="page">
 
-    <div class="ticket-edge"></div>
+<div class="container">
 
-    <div class="section" style="background:#EAEAE9; color:#0f1f3a;">
+  <div class="panel">
 
-  <!-- Гифка сверху -->
-  <div style="text-align:center; margin-bottom:16px;">
-    <img src="https://raw.githubusercontent.com/malinalispirovna22/malinalispirovna22.github.io/refs/heads/main/1000062136_627e097b.gif" 
-         style="width:220px; border-radius:16px;">
-  </div>
-    <h3>СВАДЕБНЫЙ БИЛЕТ</h3>
-      <h1>Илья & Алина</h1>
+    <h1>Polaroid Generator</h1>
 
-  <!-- Билет -->
-  <div style="position:relative; border:2px dashed #0f1f3a; border-radius:24px; background:#EAEAE9; padding:15px;">
+    <p>
+      template.png должен лежать рядом с index.html
+    </p>
 
-    <!-- Печать / штамп -->
-    <img src="https://raw.githubusercontent.com/malinalispirovna22/malinalispirovna22.github.io/refs/heads/main/print_pp.png" 
-         style="position:absolute; top:29px; right:-27px; width:113px; transform: rotate(-15deg);">
+    <div class="controls">
 
-    <!-- Данные билета в grid (6/1 части) -->
-    <div style="display:grid; grid-template-columns:8fr 1fr; gap:12px;">
-      <div style="display:flex; flex-direction:column; gap:10px;">
-        <div style="display:flex; justify-content:space-between; border-bottom:1px dashed #0f1f3a; padding-bottom:10px;">
-          <strong style="font-size:10px; color:#666; letter-spacing:1px;">FLIGHT & DATE</strong>28.02.2026
-        </div>
-        <div style="display:flex; justify-content:space-between; border-bottom:1px dashed #0f1f3a; padding-bottom:10px;">
-          <strong style="font-size:10px; color:#666; letter-spacing:1px;">CLASS</strong>Первый класс
-        </div>
-        <div style="display:flex; justify-content:space-between; border-bottom:1px dashed #0f1f3a; padding-bottom:10px;">
-          <strong style="font-size:10px; color:#666; letter-spacing:0;">TO / DESTINATION</strong>Билет в счастье
-        </div>
-        <div style="display:flex; justify-content:space-between;">
-          <strong style="font-size:10px; color:#666; letter-spacing:1px;">PLACE</strong>На борту лайнера
-        </div>
-      </div>
-      <div></div> <!-- Правая колонка для баланса -->
+      <label class="btn upload-btn">
+
+        Загрузить фото
+
+        <input
+          type="file"
+          id="upload"
+          multiple
+          accept="image/*"
+        >
+
+      </label>
+
+      <button
+        class="btn generate-btn"
+        id="generate"
+      >
+        Сгенерировать макеты
+      </button>
+
+    </div>
+
+    <div class="info">
+      В template.png окна под фото должны быть прозрачными
     </div>
 
   </div>
+
+  <div
+    class="layouts"
+    id="layouts"
+  ></div>
+
 </div>
-
-
-    <div class="section" style="background:#0f1f3a; color:#fff;">
-      <h2>ДОРОГИЕ НАШИ<br>ДРУЗЬЯ И РОДНЫЕ!</h2>
-      <p style="color:#eaeaea;">Это приглашение на наш свадебный ужин.
-      Мы очень хотим видеть вас рядом с нами в этот особенный день.</p>
-      <img class="photo" src="https://raw.githubusercontent.com/malinalispirovna22/malinalispirovna22.github.io/refs/heads/main/we_chb.jpg">
-    </div>
-
-    <div class="section">
-      <h2>МЫ ЖДЁМ ВАС</h2>
-      <p>На первом празднике нашей семьи</p>
-      <div class="calendar">
-        <h3>ФЕВРАЛЬ</h3>
-        <div class="calendar-grid">
-          <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
-          <span></span><span></span><span></span><span></span><span></span><span>1</span><span>2</span>
-          <span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
-          <span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span>
-          <span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
-          <span>24</span><span>25</span><span>26</span><span>27</span><div class="heart">28</div>
-        </div>
-      </div>
-      <h2 style="margin:0 0 0">28.02.2026</h2>
-    </div>
-
-  <div class="section timing-section" style="background:#0f1f3a; color:#fff;">
-  <h2>ТАЙМИНГ</h2>
-
-  <div class="timing-list">
-    <div class="timing-item">
-      <div class="timing-text">Сбор гостей</div>
-      <div class="timing-time">19:00</div>
-    </div>
-
-    <div class="timing-item">
-      <div class="timing-text">Фотограф</div>
-      <div class="timing-time">19:30</div>
-    </div>
-
-    <div class="timing-item">
-      <div class="timing-text">Живая музыка</div>
-      <div class="timing-time">20:00</div>
-    </div>
-
-    <div class="timing-item">
-      <div class="timing-text">Танцы</div>
-      <div class="timing-time">22:00</div>
-    </div>
-  </div>
-</div>
-
-<div class="section location-section">
-  <h2 class="location-title">МЕСТО<br>ПРОВЕДЕНИЯ</h2>
-
-  <p class="location-text">
-    На борту лайнера, Оренбург<br>
-    ул. Салмышская 51
-  </p>
-
-  <a
-    href="https://yandex.ru/maps/org/na_bortu_laynera/134563493916/?ll=55.174527%2C51.817350&z=16"
-    target="_blank"
-    class="location-button"
-  >
-    КАК ДОБРАТЬСЯ
-  </a>
-
-  <img
-    src="https://raw.githubusercontent.com/malinalispirovna22/malinalispirovna22.github.io/refs/heads/main/place.jpeg"
-    class="location-image"
-    alt="Место проведения"
-  >
-</div>
-
-<div class="section countdown-outer" style="background:#0f1f3a;">
-  <div class="countdown-card">
-
-    <img
-      src="https://raw.githubusercontent.com/malinalispirovna22/malinalispirovna22.github.io/refs/heads/main/wed.jpg"
-      class="countdown-bg"
-      alt=""
-    >
-
-    <div class="countdown-overlay">
-      <h2 class="countdown-title">ДО МЕРОПРИЯТИЯ ОСТАЛОСЬ</h2>
-
-      <div class="countdown-timer">
-        <div>
-          <span id="days">00</span>
-          <small>Дней</small>
-        </div>
-        <div>
-          <span id="hours">00</span>
-          <small>Часов</small>
-        </div>
-        <div>
-          <span id="minutes">00</span>
-          <small>Минут</small>
-        </div>
-        <div>
-          <span id="seconds">00</span>
-          <small>Секунд</small>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-   <div class="section">
-      <h2>ПОДТВЕРДИТЬ ПРИСУТСТВИЕ</h2>
-      <p style="font-size:14px; line-height:1; color:#555;"><span style="font-size:28px; vertical-align:middle;">❗</span>
-   По ссылке представлено 
-    <a 
-      href="https://drive.google.com/file/d/1kdojglAHP-2V7hxqs3II453-m6_bHKs4/view?usp=drive_open" 
-      target="_blank"
-      style="color:#0f1f3a; text-decoration:underline;"
-    >
-      меню ресторана
-    </a>  </p>
-   <p style="font-size:14px; line-height:1.6; color:#555; margin-bottom:20px;"> После отправки подтверждения, откроется диалог в Telegram, напишите туда выбранные позиции из меню.
-  </p>
-      <form id="rsvpForm">
-        <input type="text" id="name" placeholder="Ваше имя" required>
-        <select id="attendance" required>
-          <option value="">Вы сможете прийти?</option>
-          <option value="yes">Да, с радостью</option>
-          <option value="no">К сожалению, не смогу</option>
-        </select>
-        <button type="submit">Отправить</button>
-      </form>
-    </div>
-
-    <div class="ticket-edge"></div>
-
-  </div>
 
 <script>
-  document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-    e.preventDefault();
 
-    const name = document.getElementById('name').value.trim();
-    const attendance = document.getElementById('attendance').value;
+const upload = document.getElementById('upload');
+const generate = document.getElementById('generate');
+const layouts = document.getElementById('layouts');
 
-    let message = '';
+let uploadedFiles = [];
 
-    if (attendance === 'yes') {
-      message = `💍 Приглашение 28.02.2026\n\nИмя: ${name}\nОтвет: С радостью буду/будем на свадебном ужине 🎉
-Выбранные блюда:`;
-    } else if (attendance === 'no') {
-      message = `💍 Приглашение 28.02.2026\n\nИмя: ${name}\nОтвет: К сожалению, не смогу/не сможем прийти 😔`;
-    }
+upload.addEventListener('change',(e)=>{
 
-    const encodedMessage = encodeURIComponent(message);
-    const username = 'Oren_Sordes';
+  uploadedFiles = Array.from(e.target.files);
 
-    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  alert(
+    'Загружено фото: ' +
+    uploadedFiles.length
+  );
 
-    let url = '';
+});
 
-    if (isMobile) {
-      // 📱 Telegram app
-      url = `tg://resolve?domain=${username}&text=${encodedMessage}`;
-    } else {
-      // 💻 Telegram Web
-      url = `https://t.me/${username}?text=${encodedMessage}`;
-    }
+function loadImage(src){
 
-    window.open(url, '_blank');
+  return new Promise((resolve,reject)=>{
+
+    const img = new Image();
+
+    img.onload = ()=>{
+      resolve(img);
+    };
+
+    img.onerror = ()=>{
+      reject(
+        'Ошибка загрузки изображения: ' + src
+      );
+    };
+
+    img.src = src;
+
   });
-</script>
 
-<script>
-  function updateCountdown() {
-    const targetDate = new Date('2026-02-28T19:00:00');
-    const now = new Date();
-    const diff = targetDate - now;
+}
 
-    if (diff <= 0) return;
+function fileToDataURL(file){
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
+  return new Promise(resolve=>{
 
-    document.getElementById('days').textContent = String(days).padStart(2, '0');
-    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    const reader = new FileReader();
+
+    reader.onload = ()=>{
+      resolve(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+
+  });
+
+}
+
+function drawImageCover(
+  ctx,
+  img,
+  x,
+  y,
+  width,
+  height
+){
+
+  const imageRatio = img.width / img.height;
+  const frameRatio = width / height;
+
+  let drawWidth;
+  let drawHeight;
+
+  let offsetX = 0;
+  let offsetY = 0;
+
+  if(imageRatio > frameRatio){
+
+    drawHeight = height;
+    drawWidth = height * imageRatio;
+
+    offsetX = (width - drawWidth) / 2;
+
+  }else{
+
+    drawWidth = width;
+    drawHeight = width / imageRatio;
+
+    offsetY = (height - drawHeight) / 2;
+
   }
 
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+  ctx.drawImage(
+    img,
+    x + offsetX,
+    y + offsetY,
+    drawWidth,
+    drawHeight
+  );
+
+}
+
+generate.addEventListener('click', async ()=>{
+
+  try{
+
+    if(!uploadedFiles.length){
+
+      alert('Сначала загрузите фото');
+
+      return;
+    }
+
+    layouts.innerHTML = '';
+
+    // ЗАГРУЖАЕМ TEMPLATE PNG
+    const template = await loadImage(
+      'template.png'
+    );
+
+    const WIDTH = template.width;
+    const HEIGHT = template.height;
+
+    // ПЕРЕВОДИМ ФОТО В DATA URL
+    let images = await Promise.all(
+
+      uploadedFiles.map(file=>{
+
+        return fileToDataURL(file);
+
+      })
+
+    );
+
+    // НЕЧЕТНОЕ КОЛИЧЕСТВО
+    if(images.length % 2 !== 0){
+
+      images.push(
+        images[images.length - 1]
+      );
+
+    }
+
+    // ТОЧНЫЕ КООРДИНАТЫ
+    // ПОД ВАШ PSD
+
+    const LEFT_FRAME = {
+      x:160,
+      y:140,
+      width:420,
+      height:540
+    };
+
+    const RIGHT_FRAME = {
+      x:920,
+      y:140,
+      width:420,
+      height:540
+    };
+
+    // ГЕНЕРАЦИЯ
+    for(let i=0;i<images.length;i+=2){
+
+      const canvas = document.createElement(
+        'canvas'
+      );
+
+      canvas.width = WIDTH;
+      canvas.height = HEIGHT;
+
+      const ctx = canvas.getContext('2d');
+
+      // БЕЛЫЙ ФОН
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(
+        0,
+        0,
+        WIDTH,
+        HEIGHT
+      );
+
+      // ФОТО
+      const leftImage = await loadImage(
+        images[i]
+      );
+
+      const rightImage = await loadImage(
+        images[i+1]
+      );
+
+      // ЛЕВОЕ
+      drawImageCover(
+        ctx,
+        leftImage,
+        LEFT_FRAME.x,
+        LEFT_FRAME.y,
+        LEFT_FRAME.width,
+        LEFT_FRAME.height
+      );
+
+      // ПРАВОЕ
+      drawImageCover(
+        ctx,
+        rightImage,
+        RIGHT_FRAME.x,
+        RIGHT_FRAME.y,
+        RIGHT_FRAME.width,
+        RIGHT_FRAME.height
+      );
+
+      // PNG ШАБЛОН ПОВЕРХ
+      ctx.drawImage(
+        template,
+        0,
+        0,
+        WIDTH,
+        HEIGHT
+      );
+
+      // JPG
+      const jpg = canvas.toDataURL(
+        'image/jpeg',
+        1
+      );
+
+      // КАРТОЧКА
+      const card = document.createElement(
+        'div'
+      );
+
+      card.className = 'card';
+
+      // PREVIEW
+      const preview = document.createElement(
+        'img'
+      );
+
+      preview.src = jpg;
+
+      // КНОПКА СКАЧИВАНИЯ
+      const downloadButton =
+        document.createElement('button');
+
+      downloadButton.innerText =
+        'Скачать JPG';
+
+      downloadButton.addEventListener(
+        'click',
+        ()=>{
+
+          const link =
+            document.createElement('a');
+
+          link.href = jpg;
+
+          link.download =
+            `layout-${i/2+1}.jpg`;
+
+          link.click();
+
+        }
+      );
+
+      card.appendChild(preview);
+
+      card.appendChild(downloadButton);
+
+      layouts.appendChild(card);
+
+    }
+
+    alert('Макеты готовы');
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(error);
+
+  }
+
+});
+
 </script>
+
 </body>
 </html>
