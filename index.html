@@ -225,9 +225,52 @@ function drawImageCover(
   img,
   x,
   y,
-  width,
-  height
+  frameWidth,
+  frameHeight
 ){
+
+  const imgRatio =
+    img.width / img.height;
+
+  const frameRatio =
+    frameWidth / frameHeight;
+
+  let drawWidth;
+  let drawHeight;
+
+  // COVER
+  // изображение полностью закрывает рамку
+
+  if(imgRatio > frameRatio){
+
+    // фото шире рамки
+    drawHeight = frameHeight;
+    drawWidth = drawHeight * imgRatio;
+
+  }else{
+
+    // фото уже рамки
+    drawWidth = frameWidth;
+    drawHeight = drawWidth / imgRatio;
+
+  }
+
+  // центрирование
+  const offsetX =
+    x + (frameWidth - drawWidth) / 2;
+
+  const offsetY =
+    y + (frameHeight - drawHeight) / 2;
+
+  ctx.drawImage(
+    img,
+    offsetX,
+    offsetY,
+    drawWidth,
+    drawHeight
+  );
+
+}
 
   const imageRatio = img.width / img.height;
   const frameRatio = width / height;
