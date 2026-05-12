@@ -220,6 +220,12 @@ function fileToDataURL(file){
 
 }
 
+//
+// COVER FUNCTION
+// масштаб по минимальной стороне
+// лишнее обрезается
+//
+
 function drawImageCover(
   ctx,
   img,
@@ -229,7 +235,7 @@ function drawImageCover(
   frameHeight
 ){
 
-  const imgRatio =
+  const imageRatio =
     img.width / img.height;
 
   const frameRatio =
@@ -238,69 +244,30 @@ function drawImageCover(
   let drawWidth;
   let drawHeight;
 
-  // COVER
-  // изображение полностью закрывает рамку
-
-  if(imgRatio > frameRatio){
+  if(imageRatio > frameRatio){
 
     // фото шире рамки
     drawHeight = frameHeight;
-    drawWidth = drawHeight * imgRatio;
+    drawWidth = drawHeight * imageRatio;
 
   }else{
 
-    // фото уже рамки
+    // фото выше рамки
     drawWidth = frameWidth;
-    drawHeight = drawWidth / imgRatio;
+    drawHeight = drawWidth / imageRatio;
 
   }
 
-  // центрирование
-  const offsetX =
+  const drawX =
     x + (frameWidth - drawWidth) / 2;
 
-  const offsetY =
+  const drawY =
     y + (frameHeight - drawHeight) / 2;
 
   ctx.drawImage(
     img,
-    offsetX,
-    offsetY,
-    drawWidth,
-    drawHeight
-  );
-
-}
-
-  const imageRatio = img.width / img.height;
-  const frameRatio = width / height;
-
-  let drawWidth;
-  let drawHeight;
-
-  let offsetX = 0;
-  let offsetY = 0;
-
-  if(imageRatio > frameRatio){
-
-    drawHeight = height;
-    drawWidth = height * imageRatio;
-
-    offsetX = (width - drawWidth) / 2;
-
-  }else{
-
-    drawWidth = width;
-    drawHeight = width / imageRatio;
-
-    offsetY = (height - drawHeight) / 2;
-
-  }
-
-  ctx.drawImage(
-    img,
-    x + offsetX,
-    y + offsetY,
+    drawX,
+    drawY,
     drawWidth,
     drawHeight
   );
@@ -320,7 +287,10 @@ generate.addEventListener('click', async ()=>{
 
     layouts.innerHTML = '';
 
-    // ЗАГРУЖАЕМ TEMPLATE PNG
+    //
+    // TEMPLATE PNG
+    //
+
     const template = await loadImage(
       'template.png'
     );
@@ -328,7 +298,10 @@ generate.addEventListener('click', async ()=>{
     const WIDTH = template.width;
     const HEIGHT = template.height;
 
-    // ПЕРЕВОДИМ ФОТО В DATA URL
+    //
+    // FILES -> DATAURL
+    //
+
     let images = await Promise.all(
 
       uploadedFiles.map(file=>{
@@ -339,7 +312,10 @@ generate.addEventListener('click', async ()=>{
 
     );
 
+    //
     // НЕЧЕТНОЕ КОЛИЧЕСТВО
+    //
+
     if(images.length % 2 !== 0){
 
       images.push(
@@ -348,37 +324,52 @@ generate.addEventListener('click', async ()=>{
 
     }
 
-    // ТОЧНЫЕ КООРДИНАТЫ
-    // ПОД ВАШ PSD
+    //
+    // КООРДИНАТЫ КАДРОВ
+    // НАСТРОЙТЕ ПОД PSD
+    //
 
     const LEFT_FRAME = {
+
       x:160,
       y:140,
+
       width:420,
       height:540
+
     };
 
     const RIGHT_FRAME = {
+
       x:920,
       y:140,
+
       width:420,
       height:540
+
     };
 
+    //
     // ГЕНЕРАЦИЯ
+    //
+
     for(let i=0;i<images.length;i+=2){
 
-      const canvas = document.createElement(
-        'canvas'
-      );
+      const canvas =
+        document.createElement('canvas');
 
       canvas.width = WIDTH;
       canvas.height = HEIGHT;
 
-      const ctx = canvas.getContext('2d');
+      const ctx =
+        canvas.getContext('2d');
 
+      //
       // БЕЛЫЙ ФОН
+      //
+
       ctx.fillStyle = '#fff';
+
       ctx.fillRect(
         0,
         0,
@@ -386,36 +377,50 @@ generate.addEventListener('click', async ()=>{
         HEIGHT
       );
 
-      // ФОТО
-      const leftImage = await loadImage(
-        images[i]
-      );
+      //
+      // ЗАГРУЗКА ФОТО
+      //
 
-      const rightImage = await loadImage(
-        images[i+1]
-      );
+      const leftImage =
+        await loadImage(images[i]);
 
-      // ЛЕВОЕ
+      const rightImage =
+        await loadImage(images[i+1]);
+
+      //
+      // ЛЕВОЕ ФОТО
+      //
+
       drawImageCover(
         ctx,
         leftImage,
+
         LEFT_FRAME.x,
         LEFT_FRAME.y,
+
         LEFT_FRAME.width,
         LEFT_FRAME.height
       );
 
-      // ПРАВОЕ
+      //
+      // ПРАВОЕ ФОТО
+      //
+
       drawImageCover(
         ctx,
         rightImage,
+
         RIGHT_FRAME.x,
         RIGHT_FRAME.y,
+
         RIGHT_FRAME.width,
         RIGHT_FRAME.height
       );
 
-      // PNG ШАБЛОН ПОВЕРХ
+      //
+      // PSD PNG ПОВЕРХ
+      //
+
       ctx.drawImage(
         template,
         0,
@@ -424,27 +429,37 @@ generate.addEventListener('click', async ()=>{
         HEIGHT
       );
 
+      //
       // JPG
+      //
+
       const jpg = canvas.toDataURL(
         'image/jpeg',
         1
       );
 
+      //
       // КАРТОЧКА
-      const card = document.createElement(
-        'div'
-      );
+      //
+
+      const card =
+        document.createElement('div');
 
       card.className = 'card';
 
+      //
       // PREVIEW
-      const preview = document.createElement(
-        'img'
-      );
+      //
+
+      const preview =
+        document.createElement('img');
 
       preview.src = jpg;
 
-      // КНОПКА СКАЧИВАНИЯ
+      //
+      // DOWNLOAD BUTTON
+      //
+
       const downloadButton =
         document.createElement('button');
 
@@ -467,6 +482,10 @@ generate.addEventListener('click', async ()=>{
 
         }
       );
+
+      //
+      // APPEND
+      //
 
       card.appendChild(preview);
 
