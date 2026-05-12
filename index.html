@@ -23,7 +23,7 @@ body{
 }
 
 .container{
-  max-width:1200px;
+  max-width:1400px;
   margin:auto;
 }
 
@@ -74,7 +74,7 @@ input{
 .layouts{
   margin-top:30px;
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(400px,1fr));
+  grid-template-columns:repeat(auto-fill,minmax(500px,1fr));
   gap:20px;
 }
 
@@ -108,6 +108,7 @@ input{
   margin-top:20px;
   color:#999;
   font-size:14px;
+  line-height:1.6;
 }
 
 </style>
@@ -150,6 +151,16 @@ input{
 
     </div>
 
+    <div class="info">
+
+      В template.png окна под фото должны быть прозрачными
+
+      <br><br>
+
+      Размер окна:
+      727 × 901 px
+
+    </div>
 
   </div>
 
@@ -162,15 +173,25 @@ input{
 
 <script>
 
-const upload = document.getElementById('upload');
-const generate = document.getElementById('generate');
-const layouts = document.getElementById('layouts');
+const upload =
+  document.getElementById('upload');
+
+const generate =
+  document.getElementById('generate');
+
+const layouts =
+  document.getElementById('layouts');
 
 let uploadedFiles = [];
 
+//
+// UPLOAD
+//
+
 upload.addEventListener('change',(e)=>{
 
-  uploadedFiles = Array.from(e.target.files);
+  uploadedFiles =
+    Array.from(e.target.files);
 
   alert(
     'Загружено фото: ' +
@@ -179,6 +200,10 @@ upload.addEventListener('change',(e)=>{
 
 });
 
+//
+// LOAD IMAGE
+//
+
 function loadImage(src){
 
   return new Promise((resolve,reject)=>{
@@ -186,13 +211,18 @@ function loadImage(src){
     const img = new Image();
 
     img.onload = ()=>{
+
       resolve(img);
+
     };
 
     img.onerror = ()=>{
+
       reject(
-        'Ошибка загрузки изображения: ' + src
+        'Ошибка загрузки изображения: ' +
+        src
       );
+
     };
 
     img.src = src;
@@ -201,6 +231,10 @@ function loadImage(src){
 
 }
 
+//
+// FILE -> DATA URL
+//
+
 function fileToDataURL(file){
 
   return new Promise(resolve=>{
@@ -208,7 +242,9 @@ function fileToDataURL(file){
     const reader = new FileReader();
 
     reader.onload = ()=>{
+
       resolve(reader.result);
+
     };
 
     reader.readAsDataURL(file);
@@ -218,7 +254,7 @@ function fileToDataURL(file){
 }
 
 //
-// COVER FUNCTION
+// COVER MODE
 // масштаб по минимальной стороне
 // лишнее обрезается
 //
@@ -241,19 +277,33 @@ function drawImageCover(
   let drawWidth;
   let drawHeight;
 
+  //
+  // COVER
+  //
+
   if(imageRatio > frameRatio){
 
     // фото шире рамки
+
     drawHeight = frameHeight;
-    drawWidth = drawHeight * imageRatio;
+
+    drawWidth =
+      drawHeight * imageRatio;
 
   }else{
 
     // фото выше рамки
+
     drawWidth = frameWidth;
-    drawHeight = drawWidth / imageRatio;
+
+    drawHeight =
+      drawWidth / imageRatio;
 
   }
+
+  //
+  // CENTER
+  //
 
   const drawX =
     x + (frameWidth - drawWidth) / 2;
@@ -271,240 +321,293 @@ function drawImageCover(
 
 }
 
-generate.addEventListener('click', async ()=>{
+//
+// GENERATE
+//
 
-  try{
+generate.addEventListener(
+  'click',
+  async ()=>{
 
-    if(!uploadedFiles.length){
+    try{
 
-      alert('Сначала загрузите фото');
+      if(!uploadedFiles.length){
 
-      return;
+        alert(
+          'Сначала загрузите фото'
+        );
+
+        return;
+      }
+
+      layouts.innerHTML = '';
+
+      //
+      // TEMPLATE
+      //
+
+      const template =
+        await loadImage(
+          'template.png'
+        );
+
+      const WIDTH =
+        template.width;
+
+      const HEIGHT =
+        template.height;
+
+      //
+      // FILES -> DATAURL
+      //
+
+      let images =
+        await Promise.all(
+
+          uploadedFiles.map(file=>{
+
+            return fileToDataURL(file);
+
+          })
+
+        );
+
+      //
+      // ODD COUNT
+      //
+
+      if(images.length % 2 !== 0){
+
+        images.push(
+          images[
+            images.length - 1
+          ]
+        );
+
+      }
+
+      //
+      // FRAME COORDINATES
+      //
+      // ВАЖНО:
+      // ПОДСТАВЬТЕ ТОЧНЫЕ X/Y
+      // ИЗ PHOTOSHOP
+      //
+
+      const LEFT_FRAME = {
+
+        x:90,
+        y:110,
+
+        width:727,
+        height:901
+
+      };
+
+      const RIGHT_FRAME = {
+
+        x:870,
+        y:110,
+
+        width:727,
+        height:901
+
+      };
+
+      //
+      // GENERATE LAYOUTS
+      //
+
+      for(
+        let i=0;
+        i<images.length;
+        i+=2
+      ){
+
+        const canvas =
+          document.createElement(
+            'canvas'
+          );
+
+        canvas.width = WIDTH;
+        canvas.height = HEIGHT;
+
+        const ctx =
+          canvas.getContext('2d');
+
+        //
+        // WHITE BG
+        //
+
+        ctx.fillStyle = '#fff';
+
+        ctx.fillRect(
+          0,
+          0,
+          WIDTH,
+          HEIGHT
+        );
+
+        //
+        // LOAD IMAGES
+        //
+
+        const leftImage =
+          await loadImage(
+            images[i]
+          );
+
+        const rightImage =
+          await loadImage(
+            images[i+1]
+          );
+
+        //
+        // LEFT IMAGE
+        //
+
+        drawImageCover(
+
+          ctx,
+          leftImage,
+
+          LEFT_FRAME.x,
+          LEFT_FRAME.y,
+
+          LEFT_FRAME.width,
+          LEFT_FRAME.height
+
+        );
+
+        //
+        // RIGHT IMAGE
+        //
+
+        drawImageCover(
+
+          ctx,
+          rightImage,
+
+          RIGHT_FRAME.x,
+          RIGHT_FRAME.y,
+
+          RIGHT_FRAME.width,
+          RIGHT_FRAME.height
+
+        );
+
+        //
+        // PNG TEMPLATE
+        //
+
+        ctx.drawImage(
+
+          template,
+
+          0,
+          0,
+
+          WIDTH,
+          HEIGHT
+
+        );
+
+        //
+        // EXPORT JPG
+        //
+
+        const jpg =
+          canvas.toDataURL(
+            'image/jpeg',
+            1
+          );
+
+        //
+        // CARD
+        //
+
+        const card =
+          document.createElement(
+            'div'
+          );
+
+        card.className = 'card';
+
+        //
+        // PREVIEW
+        //
+
+        const preview =
+          document.createElement(
+            'img'
+          );
+
+        preview.src = jpg;
+
+        //
+        // DOWNLOAD
+        //
+
+        const downloadButton =
+          document.createElement(
+            'button'
+          );
+
+        downloadButton.innerText =
+          'Скачать JPG';
+
+        downloadButton.addEventListener(
+          'click',
+          ()=>{
+
+            const link =
+              document.createElement(
+                'a'
+              );
+
+            link.href = jpg;
+
+            link.download =
+              `layout-${i/2+1}.jpg`;
+
+            link.click();
+
+          }
+        );
+
+        //
+        // APPEND
+        //
+
+        card.appendChild(preview);
+
+        card.appendChild(downloadButton);
+
+        layouts.appendChild(card);
+
+      }
+
+      //
+      // DONE
+      //
+
+      alert(
+        'Макеты готовы'
+      );
+
+    }catch(error){
+
+      console.error(error);
+
+      alert(error);
+
     }
-
-    layouts.innerHTML = '';
-
-    //
-    // TEMPLATE PNG
-    //
-
-    const template = await loadImage(
-      'template.png'
-    );
-
-    const WIDTH = template.width;
-    const HEIGHT = template.height;
-
-    //
-    // FILES -> DATAURL
-    //
-
-    let images = await Promise.all(
-
-      uploadedFiles.map(file=>{
-
-        return fileToDataURL(file);
-
-      })
-
-    );
-
-    //
-    // НЕЧЕТНОЕ КОЛИЧЕСТВО
-    //
-
-    if(images.length % 2 !== 0){
-
-      images.push(
-        images[images.length - 1]
-      );
-
-    }
-
-    //
-    // КООРДИНАТЫ КАДРОВ
-    // НАСТРОЙТЕ ПОД PSD
-    //
-
-    const LEFT_FRAME = {
-
-      x:160,
-      y:140,
-
-      width:420,
-      height:540
-
-    };
-
-    const RIGHT_FRAME = {
-
-      x:920,
-      y:140,
-
-      width:420,
-      height:540
-
-    };
-
-    //
-    // ГЕНЕРАЦИЯ
-    //
-
-    for(let i=0;i<images.length;i+=2){
-
-      const canvas =
-        document.createElement('canvas');
-
-      canvas.width = WIDTH;
-      canvas.height = HEIGHT;
-
-      const ctx =
-        canvas.getContext('2d');
-
-      //
-      // БЕЛЫЙ ФОН
-      //
-
-      ctx.fillStyle = '#fff';
-
-      ctx.fillRect(
-        0,
-        0,
-        WIDTH,
-        HEIGHT
-      );
-
-      //
-      // ЗАГРУЗКА ФОТО
-      //
-
-      const leftImage =
-        await loadImage(images[i]);
-
-      const rightImage =
-        await loadImage(images[i+1]);
-
-      //
-      // ЛЕВОЕ ФОТО
-      //
-
-      drawImageCover(
-        ctx,
-        leftImage,
-
-        LEFT_FRAME.x,
-        LEFT_FRAME.y,
-
-        LEFT_FRAME.width,
-        LEFT_FRAME.height
-      );
-
-      //
-      // ПРАВОЕ ФОТО
-      //
-
-      drawImageCover(
-        ctx,
-        rightImage,
-
-        RIGHT_FRAME.x,
-        RIGHT_FRAME.y,
-
-        RIGHT_FRAME.width,
-        RIGHT_FRAME.height
-      );
-
-      //
-      // PSD PNG ПОВЕРХ
-      //
-
-      ctx.drawImage(
-        template,
-        0,
-        0,
-        WIDTH,
-        HEIGHT
-      );
-
-      //
-      // JPG
-      //
-
-      const jpg = canvas.toDataURL(
-        'image/jpeg',
-        1
-      );
-
-      //
-      // КАРТОЧКА
-      //
-
-      const card =
-        document.createElement('div');
-
-      card.className = 'card';
-
-      //
-      // PREVIEW
-      //
-
-      const preview =
-        document.createElement('img');
-
-      preview.src = jpg;
-
-      //
-      // DOWNLOAD BUTTON
-      //
-
-      const downloadButton =
-        document.createElement('button');
-
-      downloadButton.innerText =
-        'Скачать JPG';
-
-      downloadButton.addEventListener(
-        'click',
-        ()=>{
-
-          const link =
-            document.createElement('a');
-
-          link.href = jpg;
-
-          link.download =
-            `layout-${i/2+1}.jpg`;
-
-          link.click();
-
-        }
-      );
-
-      //
-      // APPEND
-      //
-
-      card.appendChild(preview);
-
-      card.appendChild(downloadButton);
-
-      layouts.appendChild(card);
-
-    }
-
-    alert('Макеты готовы');
-
-  }catch(error){
-
-    console.error(error);
-
-    alert(error);
 
   }
-
-});
+);
 
 </script>
 
 </body>
+
 </html>
